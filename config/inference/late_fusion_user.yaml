@@ -1,0 +1,48 @@
+General:
+  epochs: 20
+  batch_size: 1
+  img_size: 224
+  device: 'cpu'
+  user: true
+  train: true
+  test: true
+Dataset:
+  data_path : '/work/socialmedia/multimodal_dataset/final_dataset/tweets_with_img.pkl'
+  dir_root_path : '/work/socialmedia/multimodal_dataset/MultiModalDataset/'
+  best_model_path: '/results/inference/models/late_fusion_user.pt'
+  train_metrics_path: '/results/inference/metrics/train/late_fusion_user_train.csv'
+  test_metrics_path: '/results/inference/metrics/test/late_fusion_user_test.csv'
+Models:
+  model_class_name: 'LateFusion'
+  base_import_package: 'transformers'
+  image_processor_package: 'ViTImageProcessor'
+  image_model_package: 'ViTModel'
+  text_tokenizer_package: 'BertTokenizer'
+  text_model_package: 'BertModel'
+  image_processor_pretrained: 'google/vit-base-patch16-224-in21k'
+  image_model_name: 'google/vit-base-patch16-224'
+  text_processor_pretrained: 'bert-base-uncased'
+  text_model_name: 'bert-base-uncased'
+  encoder_finetuning: True
+  regularization: False
+  mlp_num_classes: 2
+  mlp_hidden_sizes:
+    - 128
+    - 64
+  mlp_dropout_prob:
+    - 0.5
+    - 0.7
+Optimizers:
+  optimizer: 'Adam'
+  learning_rate: 0.01
+  use_lr_scheduler: false
+  lr_scheduler: ''
+  momentum: 0.9
+Loss:
+  loss_fn: 'BCELoss'
+  use_custom_loss: false
+  custom_loss_fn: ''
+  reg_lambda: 0.01
+Save Best:
+  save_best_models: false
+  save_best_weights: false
